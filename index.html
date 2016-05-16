@@ -1,0 +1,116 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>上海交通通勤图</title>
+
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/clock.css" />
+</head>
+
+<body>
+
+
+    <div id="map" class="map"></div>
+    <div class="aside">
+        <div class="aside_title">北京通勤图</div>
+        <div id="aside_list" class="aside_list">
+            <!--
+            <a class="current" href="javascript:void(0);" key=""><span>全市</span></a>
+            -->
+        </div>
+    </div>
+    <div class="loading">
+        加载中......
+    </div>
+    <div class="tip" style="display:none;">
+    </div>
+
+<div class="clockArea">
+<div class="fill">
+  <div class="reference"></div>
+  <div class="clock" id="utility-clock">
+    <div class="centre">
+      <div class="dynamic"></div>
+      <div class="expand round circle-1"></div>
+      <div class="anchor hour">
+        <div class="element thin-hand"></div>
+        <div class="element fat-hand"></div>
+      </div>
+      <div class="anchor minute">
+        <div class="element thin-hand"></div>
+        <div class="element fat-hand minute-hand"></div>
+      </div>
+      <div class="anchor second">
+        <div class="element second-hand"></div>
+      </div>
+      <div class="expand round circle-2"></div>
+      <div class="expand round circle-3"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script>
+    <script type="text/javascript">
+    //w勿删
+    function isMobile() {
+      var isMobile = {
+        Android: function() {
+          return navigator.userAgent.match(/Android/i) ? true : false;
+        },
+        BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+        },
+        iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        },
+        Windows: function() {
+          return navigator.userAgent.match(/IEMobile/i) ? true : false;
+        },
+        any: function() {
+          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+        }
+      };
+      if (isMobile.any()) {
+        return true;
+      }
+      return false;
+    }
+    window.isMobile = isMobile;
+
+    </script>
+	
+    <script type="text/javascript" src="js/MapMask.js"></script>
+    <script type="text/javascript" src="js/TrafficLayer.js"></script>
+    <script type="text/javascript" src="js/clock.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/dump.js"></script>
+	<script type="text/javascript">
+		//全局变量
+		//白点个数
+		var pointNum = 500;
+		//时钟速度
+		var clockSpeed = 1100;
+		//用于改变原有数据的坐标，将其定位在上海
+		function changePoints(arr){
+			var x = 567000;
+			var y = -1191000;
+			for (var i = 0;i < arr.length;i++) {
+				for (var j = 0; j < arr[i][1].length; j++) {
+					arr[i][1][j][0] = arr[i][1][j][0] + x;
+					arr[i][1][j][1] = arr[i][1][j][1] + y;
+				}
+			}
+			
+			return arr;
+		}
+	</script>
+</body>
+</html>
